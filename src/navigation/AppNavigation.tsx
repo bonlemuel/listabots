@@ -5,9 +5,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 /** Screens */
-import { HomeMain, SettingsMain } from "../app";
+import { HomeMain, SettingsMain, ViewBot, CreateBots } from "../app";
 import { IconFont } from "../components/common";
 
+const MainStack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
 
@@ -19,8 +20,8 @@ const TabIcon = ({ name = "", color = "" }) => {
 
 const iconSetter = (route: string) => {
   switch (route) {
-    case "Home":
-      return "dashboard";
+    case "My Bots":
+      return "face";
     case "Settings":
       return "settings";
     default:
@@ -56,7 +57,7 @@ const TabStyleAndroid = {
   height: 70,
   paddingBottom: 10,
   borderTopColor: "transparent",
-  backgroundColor: "#323232",
+  backgroundColor: "#FFF",
   shadowOffset: {
     width: 0,
     height: 2,
@@ -68,7 +69,7 @@ const TabStyleAndroid = {
 const TabStyleiOS = {
   height: 100,
   borderTopColor: "transparent",
-  backgroundColor: "#323232",
+  backgroundColor: "#FFF",
   shadowOffset: {
     width: 0,
     height: 2,
@@ -84,7 +85,7 @@ const TabNavigation = () => {
     <>
       <StatusBar
         animated={true}
-        backgroundColor="#f48039"
+        backgroundColor="#246fa5"
         barStyle={"dark-content"}
         showHideTransition={"slide"}
         hidden={false}
@@ -93,13 +94,13 @@ const TabNavigation = () => {
         initialRouteName="Home"
         screenOptions={({ route: { name } }) => ({
           tabBarIcon: ({ color }) => <TabIcon name={name} color={color} />,
-          tabBarActiveTintColor: "#FFF",
-          tabBarInactiveTintColor: "#d3d3d3",
+          tabBarActiveTintColor: "#246fa5",
+          tabBarInactiveTintColor: "#a9a9a9",
           headerShown: false,
           tabBarStyle: TabStyle,
         })}
       >
-        <Tab.Screen name="Home" component={HomeNav} />
+        <Tab.Screen name="My Bots" component={HomeNav} />
         <Tab.Screen name="Settings" component={SettingsNav} />
       </Tab.Navigator>
     </>
@@ -107,7 +108,17 @@ const TabNavigation = () => {
 };
 
 const AppNavigation = () => {
-  return TabNavigation();
+  return (
+    <MainStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <MainStack.Screen name="HomeRoot" component={TabNavigation} />
+      <MainStack.Screen name="CreateBot" component={CreateBots} />
+      <MainStack.Screen name="ViewBot" component={ViewBot} />
+    </MainStack.Navigator>
+  );
 };
 
 export default AppNavigation;
