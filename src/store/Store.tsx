@@ -1,17 +1,18 @@
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {combineReducers} from 'redux';
-import {persistReducer, persistStore} from 'redux-persist';
-import thunk from 'redux-thunk';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { combineReducers } from "redux";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
-import AuthSlice from './slice/AuthSlice';
+import BotSlice from "./slice/BotSlice";
 
 const reducers = combineReducers({
-  counter: AuthSlice,
+  bots: BotSlice,
 });
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: AsyncStorage,
 };
 
@@ -20,7 +21,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = configureStore({
   reducer: persistedReducer,
   devTools: true,
-  middleware: [thunk],
+  middleware: [thunk, logger],
 });
 
 export const persistor = persistStore(store);
