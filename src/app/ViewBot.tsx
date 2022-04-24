@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../store/Hooks";
 
-import { Stack, Button, Heading, Box, Avatar, Center, VStack } from "native-base";
+import {
+  Stack,
+  Button,
+  Heading,
+  Box,
+  Avatar,
+  Center,
+  VStack,
+  useToast,
+} from "native-base";
 import { StyleSheet } from "react-native";
 import { HeaderBar, Input, Text } from "../components/common";
 
@@ -13,6 +22,7 @@ const ViewBot = (props: any) => {
   const { navigation } = props;
 
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const CURRENT_BOT = useAppSelector(selectCurrentBot);
 
@@ -45,6 +55,9 @@ const ViewBot = (props: any) => {
      * * Go back after bot creation
      */
     goBack();
+    toast.show({
+      description: "Bot updated",
+    });
   };
 
   const _renderHome = () => {

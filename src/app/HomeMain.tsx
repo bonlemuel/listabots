@@ -29,11 +29,9 @@ const HomeMain = (props: any) => {
   const { navigation } = props;
 
   const dispatch = useAppDispatch();
-
   const toast = useToast();
 
   const BOTS = useAppSelector(selectAllBots);
-  const CURRENT_BOT = useAppSelector(selectCurrentBot);
 
   const navTo = (path: String) => {
     navigation.navigate(path);
