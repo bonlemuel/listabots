@@ -1,45 +1,45 @@
-import React, { useState } from "react";
-import { useAppDispatch } from "../store/Hooks";
+import React, { useState, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../store/Hooks";
 
-import { Stack, Button, Heading, Box, VStack, useToast } from "native-base";
+import { Stack, Button, Heading, Box, Avatar, Center, VStack } from "native-base";
 import { StyleSheet } from "react-native";
-import { HeaderBar, Input } from "../components/common";
+import { HeaderBar, Input, Text } from "../components/common";
 
-import { createBot } from "../store/slice/BotSlice";
+import { updateBot, selectCurrentBot } from "../store/slice/BotSlice";
 
 import moment from "moment";
 
-const CreateBots = (props: any) => {
+const ViewBot = (props: any) => {
   const { navigation } = props;
-  const toast = useToast();
 
   const dispatch = useAppDispatch();
 
+  const CURRENT_BOT = useAppSelector(selectCurrentBot);
+
   const [botName, setBotName] = useState("");
   const [botPurpose, setBotPurpose] = useState("");
+
+  useEffect(() => {
+    if (CURRENT_BOT) {
+      setBotName(CURRENT_BOT.name);
+      setBotPurpose(CURRENT_BOT.purpose);
+    }
+  }, [CURRENT_BOT]);
 
   const goBack = () => {
     navigation.goBack();
   };
 
-  const generateID = () => {
-    return Math.floor(100000 + Math.random() * 900000);
-  };
-
-  const handleCreateBot = () => {
-    let randID = generateID();
+  const handleUpdateBot = () => {
     let data = {
-      id: randID,
-      avatar: "https://avatars.dicebear.com/api/bottts/" + randID + ".png",
+      id: CURRENT_BOT.id,
+      avatar: "https://avatars.dicebear.com/api/bottts/" + CURRENT_BOT.id + ".png",
       name: botName,
       purpose: botPurpose,
-      createdAt: moment().format("MM/DD/YYYY"),
+      createdAt: CURRENT_BOT.createdAt,
       updatedAt: moment().format("MM/DD/YYYY"),
     };
-    dispatch(createBot(data));
-    toast.show({
-      description: "Bot has been added",
-    });
+    dispatch(updateBot(data));
 
     /**
      * * Go back after bot creation
@@ -75,9 +75,28 @@ const CreateBots = (props: any) => {
         />
         <Box>
           <Heading fontSize="xl" p="4">
-            Create New Bot
+            {CURRENT_BOT.name}
           </Heading>
           <VStack p={2} space={2}>
+            <Center>
+              <Avatar
+                background={"#FFF"}
+                size={"2xl"}
+                source={{ uri: CURRENT_BOT.avatar }}
+              />
+              <Text
+                fontSize="md"
+                fontWeight={900}
+                color={"#000"}
+                label={"Bot ID: " + CURRENT_BOT.id}
+              />
+              <Text
+                fontSize="sm"
+                fontWeight={300}
+                color={"#000"}
+                label={"Last Updated: " + CURRENT_BOT.updatedAt}
+              />
+            </Center>
             <Input
               type="text"
               placeholder="Name"
@@ -95,9 +114,9 @@ const CreateBots = (props: any) => {
               bg={botName === "" || botPurpose === "" ? "#d3d3d3" : null}
               size="lg"
               disabled={botName === "" || botPurpose === ""}
-              onPress={() => handleCreateBot()}
+              onPress={() => handleUpdateBot()}
             >
-              Create Bot
+              Update Bot
             </Button>
           </VStack>
         </Box>
@@ -112,4 +131,4 @@ const styles = StyleSheet.create({
   container: { width: "100%", height: "75%" },
 });
 
-export default CreateBots;
+export default ViewBot;

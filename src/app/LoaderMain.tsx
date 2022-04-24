@@ -19,7 +19,7 @@ const LoaderMain = (props: any) => {
   };
 
   return (
-    <VStack flex={1} bg={"#fffae8"} alignItems={"center"} justifyContent="space-around">
+    <VStack flex={1} bg={"#FFF"} alignItems={"center"} justifyContent="space-around">
       <View style={styles.animContainer}>
         <Animation source={RobotAnim} autoPlay={true} loop={true} />
       </View>
