@@ -1,0 +1,6 @@
+module Pods_ListaBots_ListaBotsTests {
+  umbrella header "Pods-ListaBots-ListaBotsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
