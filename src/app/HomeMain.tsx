@@ -16,12 +16,7 @@ import {
 import { StyleSheet, View } from "react-native";
 import { HeaderBar, Text, Animation } from "../components/common";
 
-import {
-  deleteBot,
-  selectBot,
-  selectAllBots,
-  selectCurrentBot,
-} from "../store/slice/BotSlice";
+import { deleteBot, selectBot, selectAllBots } from "../store/slice/BotSlice";
 
 import { NoRobotAnim } from "../assets/animations";
 
