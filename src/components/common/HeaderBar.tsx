@@ -13,16 +13,16 @@ type HeaderProps = {
 const HeaderBar = (props: HeaderProps) => {
   const { title, type, showPrefix, showSuffix, prefix, suffix } = props;
   const _renderDashboard = () => (
-    <Box safeAreaTop bg={"#f48039"}>
+    <Box safeAreaTop bg={"#246fa5"}>
       <HStack
-        bg={"#f48039"}
+        bg={"#246fa5"}
         px="4"
         py="3"
         justifyContent="space-between"
         alignItems="center"
         w="100%"
       >
-        <HStack alignItems="center">
+        <HStack w={"100%"} alignItems="center" justifyContent={"space-between"}>
           {showPrefix && prefix}
           <Text color="white" fontSize="20" fontWeight="bold">
             {title}

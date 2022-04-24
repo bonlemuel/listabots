@@ -1,6 +1,6 @@
 import React from "react";
-import {StyleSheet} from "react-native";
-import {Input as NBInput, FormControl} from "native-base";
+import { StyleSheet } from "react-native";
+import { Input as NBInput, FormControl } from "native-base";
 import Icon from "react-native-vector-icons/dist/MaterialIcons";
 Icon.loadFont();
 
@@ -36,10 +36,19 @@ type InputProps = {
   maxLength?: any;
   InputLeftElement?: any;
   InputRightElement?: any;
+  value: string;
+  onChangeText: any;
 };
 
 const Input = (props: InputProps) => {
-  const {type, placeholder, InputLeftElement, InputRightElement} = props;
+  const {
+    type,
+    placeholder,
+    value,
+    InputLeftElement,
+    InputRightElement,
+    onChangeText,
+  } = props;
   return (
     <FormControl>
       <NBInput
@@ -60,13 +69,15 @@ const Input = (props: InputProps) => {
         size={"lg"}
         InputLeftElement={InputLeftElement}
         InputRightElement={InputRightElement}
+        value={value}
+        onChangeText={onChangeText}
       />
     </FormControl>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {fontFamily: "Roboto-Regular"},
+  input: { fontFamily: "Roboto-Regular" },
 });
 
 export default Input;

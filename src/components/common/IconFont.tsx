@@ -9,10 +9,8 @@ type IconProps = {
 };
 
 const IconFont = (props: IconProps) => {
-  const {name, color} = props;
-  return (
-    <Icon {...props} name={name} size={30} color={color ? color : "#FFF"} />
-  );
+  const { name, color } = props;
+  return <Icon {...props} name={name} size={25} color={color ? color : "#FFF"} />;
 };
 
 export default IconFont;

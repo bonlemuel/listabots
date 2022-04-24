@@ -1,5 +1,5 @@
 import React from "react";
-import {Text as NBText} from "native-base";
+import { Text as NBText } from "native-base";
 
 type TextProps = {
   label: String;
@@ -10,14 +10,15 @@ type TextProps = {
 };
 
 const Text = (props: TextProps) => {
-  const {label, color = "lightText", textAlign, fontSize, fontWeight} = props;
+  const { label, color = "lightText", textAlign, fontSize, fontWeight } = props;
   return (
     <NBText
       {...props}
       color={color}
       textAlign={textAlign}
       fontSize={fontSize}
-      fontWeight={fontWeight}>
+      fontWeight={fontWeight}
+    >
       {label}
     </NBText>
   );

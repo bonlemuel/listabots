@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {VStack, Select as NBSelect} from "native-base";
+import React, { useState } from "react";
+import { VStack, Select as NBSelect } from "native-base";
 
 interface SelectionsArr {
   label: string;
@@ -7,14 +7,14 @@ interface SelectionsArr {
 }
 
 type SelectorProps = {
-  label: String;
+  label: string;
   selected: any;
   onValueChange: any;
   selections: Array<SelectionsArr>;
 };
 
 const Selector = (props: SelectorProps) => {
-  const {label, selected, onValueChange, selections} = props;
+  const { label, selected, onValueChange, selections } = props;
   return (
     <VStack alignItems="center" space={4}>
       <NBSelect
@@ -28,16 +28,13 @@ const Selector = (props: SelectorProps) => {
           base: "55px",
         }}
         variant={"filled"}
-        placeholder="Gender"
+        placeholder={label}
         fontSize={"md"}
-        onValueChange={onValueChange}>
+        onValueChange={onValueChange}
+      >
         {selections &&
           selections.map((value, index) => (
-            <NBSelect.Item
-              key={index}
-              label={value.label}
-              value={value.value}
-            />
+            <NBSelect.Item key={index} label={value.label} value={value.value} />
           ))}
       </NBSelect>
     </VStack>
