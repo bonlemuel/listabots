@@ -28,6 +28,10 @@ const HomeMain = (props: any) => {
 
   const BOTS = useAppSelector(selectAllBots);
 
+  useEffect(() => {
+    console.debug("BOTS => ", BOTS);
+  }, [BOTS]);
+
   const navTo = (path: String) => {
     navigation.navigate(path);
   };
